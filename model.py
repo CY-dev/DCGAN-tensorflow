@@ -3,12 +3,13 @@ import os
 import time
 import math
 import tensorflow as tf
+from scipy.misc import imread
 import numpy as np
 from six.moves import xrange
 import glob
-
+from scipy import misc 
 from ops import *
-from utils import *
+from utils.unzip import *
 
 def conv_out_size_same(size, stride):
   return int(math.ceil(float(size) / float(stride)))
@@ -79,7 +80,7 @@ class DCGAN(object):
       self.c_dim = self.data_X[0].shape[-1]
     else:
       self.data = glob.glob(data_path)  #"./data", self.dataset_type
-      imreadImg = imread(self.data[0]);
+      imreadImg = misc.imread(self.data[0]);
       if len(imreadImg.shape) >= 3: #check if image is a non-grayscale image by checking channel number
         self.c_dim = imread(self.data[0]).shape[-1]
       else:

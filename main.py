@@ -1,9 +1,11 @@
 import os
-import scipy.misc
+from scipy import misc #import scipy.misc
 import numpy as np
+import glob
 
 from model import DCGAN
-from utils import pp, visualize, to_json, show_all_variables
+from utils.unzip import unzip_and_save
+from utils.utils import pp, visualize, to_json, show_all_variables
 
 import tensorflow as tf
 from tensorport import get_data_path, get_logs_path
@@ -11,7 +13,7 @@ from tensorport import get_data_path, get_logs_path
 
 LOCAL_PATH_TO_LOGS = "checkpoint"
 ROOT_PATH_TO_LOCAL_DATA = os.path.expanduser("~/Documents/data")
-LOCAL_REPO = "celebA"
+LOCAL_REPO = "celebA_zipped"
 
 
 flags = tf.app.flags
@@ -29,8 +31,8 @@ flags.DEFINE_string("data_path",
     get_data_path(dataset_name = "malo/*",
         local_root = ROOT_PATH_TO_LOCAL_DATA,
         local_repo = LOCAL_REPO,
-        path = "*.jpg"),
-    "Glob pattern of data path [*]")
+        path = ""),
+    "data path for zip file")
 flags.DEFINE_string("checkpoint_dir", get_logs_path(LOCAL_PATH_TO_LOGS), "Directory name to save the checkpoints [checkpoint]")
 flags.DEFINE_string("sample_dir", get_logs_path("samples"), "Directory name to save the image samples [samples]") #TODO: replace with os.path.join(logs/samples) when folders are supported
 flags.DEFINE_boolean("train", True, "True for training, False for testing [True]")
@@ -40,6 +42,7 @@ FLAGS = flags.FLAGS
 
 
 def main(_):
+  print("FLAG1")
   pp.pprint(flags.FLAGS.__flags)
 
   if FLAGS.input_width is None:
@@ -51,11 +54,28 @@ def main(_):
     os.makedirs(FLAGS.checkpoint_dir)
   if not os.path.exists(FLAGS.sample_dir):
     os.makedirs(FLAGS.sample_dir)
-
+  print("FLAG2")
   #gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
   run_config = tf.ConfigProto()
   run_config.gpu_options.allow_growth=True
+  print("FLAG3")
 
+  # extract zipfile
+  print(FLAGS.dataset)
+  print(os.path.join(FLAGS.data_path,"*.zip"))
+  source_path = glob.glob(os.path.join(FLAGS.data_path,"*.zip"))
+  print(source_path)
+  for i, zipped_file in enumerate(source_path):
+      print("Extracting image zip %s of %s" % (i+1,len(source_path)))
+      if os.path.exists(os.path.join(FLAGS.data_path,"celebA")):
+          print("...File already exists")
+      else:
+          print(zipped_file)
+          unzip_and_save(zipped_file, FLAGS.data_path)
+          print("...Extracted!")
+  print("FLAG4")
+  print(os.path.join(FLAGS.data_path,"celebA/*.jpg"))
+  unzipped_data_path = glob.glob(os.path.join(FLAGS.data_path,"celebA/*.jpg"))[0] #right now we support only one dataset
   with tf.Session(config=run_config) as sess:
     if FLAGS.dataset == 'mnist':
       dcgan = DCGAN(
@@ -68,13 +88,11 @@ def main(_):
           sample_num=FLAGS.batch_size,
           y_dim=10,
           data_path = FLAGS.data_path,
-          dataset_type=FLAGS.dataset,
+          dataset_type=unzipped_data_path,
           crop=FLAGS.crop,
           checkpoint_dir=FLAGS.checkpoint_dir,
           sample_dir=FLAGS.sample_dir)
     else:
-
-
       dcgan = DCGAN(
           sess,
           input_width=FLAGS.input_width,
@@ -83,7 +101,7 @@ def main(_):
           output_height=FLAGS.output_height,
           batch_size=FLAGS.batch_size,
           sample_num=FLAGS.batch_size,
-          data_path = FLAGS.data_path,
+          data_path = unzipped_data_path,
           dataset_type=FLAGS.dataset,
           crop=FLAGS.crop,
           checkpoint_dir=FLAGS.checkpoint_dir,
