@@ -75,7 +75,7 @@ def main(_):
           print("...Extracted!")
   print("FLAG4")
   print(os.path.join(FLAGS.data_path,"celebA/*.jpg"))
-  unzipped_data_path = glob.glob(os.path.join(FLAGS.data_path,"celebA/*.jpg")) #right now we support only one dataset
+  unzipped_data_path = os.path.join(FLAGS.data_path,"celebA/*.jpg") #right now we support only one dataset
   print(unzipped_data_path)
   with tf.Session(config=run_config) as sess:
     if FLAGS.dataset == 'mnist':
@@ -88,7 +88,7 @@ def main(_):
           batch_size=FLAGS.batch_size,
           sample_num=FLAGS.batch_size,
           y_dim=10,
-          data_path = FLAGS.data_path,
+          data_path = FLAGS.data_path, #glob signature
           dataset_type=unzipped_data_path,
           crop=FLAGS.crop,
           checkpoint_dir=FLAGS.checkpoint_dir,
