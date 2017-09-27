@@ -7,7 +7,7 @@ from scipy.misc import imread
 import numpy as np
 from six.moves import xrange
 import glob
-from scipy import misc 
+from scipy import misc
 from ops import *
 from utils.unzip import *
 

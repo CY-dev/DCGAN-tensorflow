@@ -75,7 +75,8 @@ def main(_):
           print("...Extracted!")
   print("FLAG4")
   print(os.path.join(FLAGS.data_path,"celebA/*.jpg"))
-  unzipped_data_path = glob.glob(os.path.join(FLAGS.data_path,"celebA/*.jpg"))[0] #right now we support only one dataset
+  unzipped_data_path = glob.glob(os.path.join(FLAGS.data_path,"celebA/*.jpg")) #right now we support only one dataset
+  print(unzipped_data_path)
   with tf.Session(config=run_config) as sess:
     if FLAGS.dataset == 'mnist':
       dcgan = DCGAN(
