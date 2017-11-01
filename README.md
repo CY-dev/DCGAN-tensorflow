@@ -1,5 +1,8 @@
 # DCGAN in Tensorflow
 
+TensorPort tweak of this repo: https://github.com/carpedm20/DCGAN-tensorflow
+
+
 Tensorflow implementation of [Deep Convolutional Generative Adversarial Networks](http://arxiv.org/abs/1511.06434) which is a stabilize Generative Adversarial Networks. The referenced torch code can be found [here](https://github.com/soumith/dcgan.torch).
 
 ![alt tag](DCGAN.png)
@@ -27,28 +30,9 @@ Tensorflow implementation of [Deep Convolutional Generative Adversarial Networks
 
 ## Usage
 
-First, download dataset with:
+The dataset and code are pre-loaded on [TensorPort](www.tensorport.com) as `tensorbot/onboarding-DCGAN` and `tensorbot/celebA`.
 
-    $ python download.py mnist celebA
-
-To train a model with downloaded dataset:
-
-    $ python main.py --dataset mnist --input_height=28 --output_height=28 --train
-    $ python main.py --dataset celebA --input_height=108 --train --crop
-
-To test with an existing model:
-
-    $ python main.py --dataset mnist --input_height=28 --output_height=28
-    $ python main.py --dataset celebA --input_height=108 --crop
-
-Or, you can use your own dataset (without central crop) by:
-
-    $ mkdir data/DATASET_NAME
-    ... add images to data/DATASET_NAME ...
-    $ python main.py --dataset DATASET_NAME --train
-    $ python main.py --dataset DATASET_NAME
-    $ # example
-    $ python main.py --dataset=eyes --input_fname_pattern="*_cropped.png" --train
+Run it with `tport run` (see the [docs](docs.tensorport.com))
 
 ## Results
 
@@ -110,3 +94,4 @@ Details of the histogram of true and fake result of discriminator (with custom d
 ## Author
 
 Taehoon Kim / [@carpedm20](http://carpedm20.github.io/)
+TensorPort tweak by [@malomarrec](https://github.com/malomarrec)
