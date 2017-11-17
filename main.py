@@ -74,8 +74,8 @@ def main(_):
           unzip_and_save(zipped_file, FLAGS.data_path)
           print("...Extracted!")
   print("FLAG4")
-  print(os.path.join(FLAGS.data_path,"celebA/*.jpg"))
-  unzipped_data_path = os.path.join(FLAGS.data_path,"celebA/*.jpg") #right now we support only one dataset
+  print(os.path.join(FLAGS.data_path,"*/*.jpg"))
+  unzipped_data_path = os.path.join(FLAGS.data_path,"*/*.jpg") #right now we support only one dataset
   print(unzipped_data_path)
   with tf.Session(config=run_config) as sess:
     if FLAGS.dataset == 'mnist':
