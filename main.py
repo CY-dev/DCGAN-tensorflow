@@ -11,6 +11,7 @@ import tensorflow as tf
 from tensorport import get_data_path, get_logs_path
 
 
+TENSORPORT_USERNAME = "svenchmie"
 LOCAL_PATH_TO_LOGS = "checkpoint"
 ROOT_PATH_TO_LOCAL_DATA = os.path.expanduser("~/Documents/data")
 LOCAL_REPO = "celebA_zipped"
@@ -28,7 +29,7 @@ flags.DEFINE_integer("output_height", 64, "The size of the output images to prod
 flags.DEFINE_integer("output_width", None, "The size of the output images to produce. If None, same value as output_height [None]")
 flags.DEFINE_string("dataset", "celebA", "The name of dataset [celebA, mnist, lsun]")
 flags.DEFINE_string("data_path",
-    get_data_path(dataset_name = "tensorbot/*",
+    get_data_path(dataset_name = "%s/*" % TENSORPORT_USERNAME,
         local_root = ROOT_PATH_TO_LOCAL_DATA,
         local_repo = LOCAL_REPO,
         path = ""),
