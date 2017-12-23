@@ -15,7 +15,7 @@ This Readme provides instructions to run this DCGAN on TensorPort. For more info
 
 - [Install](#install)
 - [Usage](#usage)
-- [More Info](#more info)
+- [More Info](#more-info)
 - [License](#license)
 
 ## Install
