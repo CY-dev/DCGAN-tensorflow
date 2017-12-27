@@ -11,9 +11,9 @@ import tensorflow as tf
 from tensorport import get_data_path, get_logs_path
 
 
-TENSORPORT_USERNAME = "YOUR USERNAME"
+TENSORPORT_USERNAME = "svenchmie"
 LOCAL_PATH_TO_LOGS = "checkpoint"
-ROOT_PATH_TO_LOCAL_DATA = os.path.expanduser("~\Documents\celebA_small")
+ROOT_PATH_TO_LOCAL_DATA = os.path.expanduser("~\\Documents\\celebA_small\\")
 LOCAL_REPO = "celeba-small"
 
 
