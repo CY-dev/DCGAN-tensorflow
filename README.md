@@ -42,7 +42,9 @@ Clone this repository to your local machine.
 
 Open [main.py](/main.py) and change the flag at the top of the script to their appropriate value:
 
-- `TENSORPORT_USERNAME`: your TensorPort username. This should be something like `johndoe`, not your email address!
+1. `TENSORPORT_USERNAME`: Your TensorPort username. This should be something like `johndoe`, not your email address!
+2. `ROOT_PATH_TO_LOCAL_DATA`: Path to the dataset on your local machine. This is only important if you want to run the code locally instead of on the TensorPort server. **Really? And if so, why do we mention it here?**
+3. `LOCAL_REPO`: The name of the local repository. 
 
 ### Create the project
 
