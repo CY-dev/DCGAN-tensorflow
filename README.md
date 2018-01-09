@@ -1,6 +1,10 @@
 # DCGAN on TensorPort
-
-[![join us on slack](https://slackin-altdyjrdgq.now.sh/badge.svg)](https://slackin-altdyjrdgq.now.sh)
+<p align="center">
+<img src="https://raw.githubusercontent.com/SvenChmie/mnist/master/tp_logo.png" alt="TensorPort" width="200">
+<br>
+<br>
+<a href="https://slackin-altdyjrdgq.now.sh"><img src="https://slackin-altdyjrdgq.now.sh/badge.svg" alt="join us on slack"></a>
+</p>
 
 This is a TensorFlow implementation of a Deep Convolutional Generative Adversarial Network. The project uses the [celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset to create artificial celebrity faces. The [original repository](https://github.com/carpedm20/DCGAN-tensorflow) has been adapted to help you get started with the [TensorPort](https://tensorport.com) deep learning computation platform.
 
