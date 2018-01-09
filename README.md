@@ -8,7 +8,7 @@ This is a TensorFlow implementation of a Deep Convolutional Generative Adversari
 
 The implementation is based on [this paper](http://arxiv.org/abs/1511.06434). The Torch code referenced in the paper can be found [here](https://github.com/soumith/dcgan.torch).
 
-This Readme provides instructions to run this DCGAN on TensorPort. For more information, check out the [TensorPort documentation](https://docs.tensorport.com/docs/9-one-more-example) for this example. 
+This Readme provides instructions to run this DCGAN on TensorPort. For more information, check out the [TensorPort documentation](https://docs.tensorport.com/v1.0/docs/creating-celebrity-faces-using-a-dcgan) for this example. 
 
 
 ## Table of Contents
