@@ -37,7 +37,7 @@ This example uses a small subset of the celebA dataset containing 1000 images to
 
 1. Download the reduced dataset [here](https://tensorport-public-datasets.s3.amazonaws.com/celebA_small.zip). Unzip the downloaded file and `cd` into the directory with the data.
 2. Log into your TensorPort account using `tport login`.
-3. Then create a new dataset with `tport create dataset`. Name the dataset `celebA-small`.
+3. Then create a new dataset with `tport create dataset`. Name the dataset `celeba-small`.
 4. Upload the dataset to your TensorPort account with `git push tensorport master`.
 
 ### Get the code ready
@@ -47,7 +47,7 @@ Clone this repository to your local machine.
 Open [main.py](/main.py) and change the flag at the top of the script to their appropriate value:
 
 1. `TENSORPORT_USERNAME`: Your TensorPort username. This should be something like `johndoe`, not your email address!
-2. `ROOT_PATH_TO_LOCAL_DATA`: Path to the dataset on your local machine. This is only important if you want to run the code locally instead of on the TensorPort server. **Really? And if so, why do we mention it here?**
+2. `ROOT_PATH_TO_LOCAL_DATA`: The path to the dataset on your local machine.
 3. `LOCAL_REPO`: The name of the local repository. 
 
 ### Create the project
