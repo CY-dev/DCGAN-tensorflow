@@ -1,97 +1,82 @@
-# DCGAN in Tensorflow
+# DCGAN on TensorPort
+<p align="center">
+<img src="https://raw.githubusercontent.com/SvenChmie/mnist/master/tp_logo.png" alt="TensorPort" width="200">
+<br>
+<br>
+<a href="https://slackin-altdyjrdgq.now.sh"><img src="https://slackin-altdyjrdgq.now.sh/badge.svg" alt="join us on slack"></a>
+</p>
 
-TensorPort tweak of this repo: https://github.com/carpedm20/DCGAN-tensorflow
-
-
-Tensorflow implementation of [Deep Convolutional Generative Adversarial Networks](http://arxiv.org/abs/1511.06434) which is a stabilize Generative Adversarial Networks. The referenced torch code can be found [here](https://github.com/soumith/dcgan.torch).
+This is a TensorFlow implementation of a Deep Convolutional Generative Adversarial Network. The project uses the [celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset to create artificial celebrity faces. The [original repository](https://github.com/carpedm20/DCGAN-tensorflow) has been adapted to help you get started with the [TensorPort](https://tensorport.com) deep learning computation platform.
 
 ![alt tag](DCGAN.png)
 
-* [Brandon Amos](http://bamos.github.io/) wrote an excellent [blog post](http://bamos.github.io/2016/08/09/deep-completion/) and [image completion code](https://github.com/bamos/dcgan-completion.tensorflow) based on this repo.
-* *To avoid the fast convergence of D (discriminator) network, G (generator) network is updated twice for each D network update, which differs from original paper.*
+The implementation is based on [this paper](http://arxiv.org/abs/1511.06434). The Torch code referenced in the paper can be found [here](https://github.com/soumith/dcgan.torch).
+
+This Readme provides instructions to run this DCGAN on TensorPort. For more information, check out the [TensorPort documentation](https://docs.tensorport.com/v1.0/docs/creating-celebrity-faces-using-a-dcgan) for this example. 
 
 
-## Online Demo
+## Table of Contents
 
-[<img src="https://raw.githubusercontent.com/carpedm20/blog/master/content/images/face.png">](http://carpedm20.github.io/faces/)
+- [Install](#install)
+- [Usage](#usage)
+- [More Info](#more-info)
+- [License](#license)
 
-[link](http://carpedm20.github.io/faces/)
+## Install
 
+To run this project, you need:
 
-## Prerequisites
+- [Python](https://python.org/) 3.5 or higher.
+- [Git](https://git-scm.com/)
+- The tensorport Python library. Install it with `pip install tensorport`
+- A TensorPort account. [Sign up](https://tensorport.com) for free if you don't have an account yet.
 
-- Python 2.7 or Python 3.3+
-- [Tensorflow 0.12.1](https://github.com/tensorflow/tensorflow/tree/r0.12)
-- [SciPy](http://www.scipy.org/install.html)
-- [pillow](https://github.com/python-pillow/Pillow)
-- (Optional) [moviepy](https://github.com/Zulko/moviepy) (for visualization)
-- (Optional) [Align&Cropped Images.zip](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) : Large-scale CelebFaces Dataset
+### Create the dataset
 
+This example uses a small subset of the celebA dataset containing 1000 images to reduce file transfer times. You can of course also use the entire dataset. However, be aware that the dataset is large and may take a long time to upload to the TensorPort server.
+
+1. Download the reduced dataset [here](https://tensorport-public-datasets.s3.amazonaws.com/celebA_small.zip). Unzip the downloaded file and `cd` into the directory with the data.
+2. Log into your TensorPort account using `tport login`.
+3. Then create a new dataset with `tport create dataset`. Name the dataset `celeba-small`.
+4. Upload the dataset to your TensorPort account with `git push tensorport master`.
+
+### Get the code ready
+
+Clone this repository to your local machine.
+
+Open [main.py](/main.py) and change the flag at the top of the script to their appropriate value:
+
+1. `TENSORPORT_USERNAME`: Your TensorPort username. This should be something like `johndoe`, not your email address!
+2. `ROOT_PATH_TO_LOCAL_DATA`: The path to the dataset on your local machine.
+3. `LOCAL_REPO`: The name of the local repository. 
+
+### Create the project
+
+Open a command line and `cd` into the root folder of the repository. Create a new project with `tport create project` and name it `dcgan-demo`.
+
+Push the project code to TensorPort with `git push tensorport master`. The project is now uploaded to your  TensorPort account.
 
 ## Usage
 
-The dataset and code are pre-loaded on [TensorPort](www.tensorport.com) as `tensorbot/onboarding-DCGAN` and `tensorbot/celebA`.
+Use the following command to create a job and run the project on TensorPort. Make sure to replace `YOUR_USERNAME` with your TensorPort username.
 
-Run it with `tport run` (see the [docs](docs.tensorport.com))
+```shell
+tport run --name 1-GPU-small-dataset --project YOUR_USERNAME/dcgan-demo \ 
+--datasets YOUR_USERNAME/celeba-small  --module main \
+--requirements requirements.txt --framework-version 1.0.0 \
+--mode single-node \
+--instance-type c4.2xlarge \
+--time-limit 1h --description ""
+```
 
-## Results
+## More Info
 
-![result](assets/training.gif)
+For more information and further reading, check out [Brandon Amos](http://bamos.github.io/)'s [blog post](http://bamos.github.io/2016/08/09/deep-completion/) and [image completion code](https://github.com/bamos/dcgan-completion.tensorflow) based on the original repository.
 
-### celebA
+The purpose of this fork is to teach you how to run DCGAN on TensorPort. For more information about what you can do with the project code, make sure to have a look at the [original Github repository](https://github.com/carpedm20/DCGAN-tensorflow).
 
-After 6th epoch:
+## License
 
-![result3](assets/result_16_01_04_.png)
+[MIT](LICENSE) © [Original repository](https://github.com/tensorport/DCGAN-tensorflow) by [Taehoon Kim](http://carpedm20.github.io/), modifications by Good AI Lab, Inc.
 
-After 10th epoch:
-
-![result4](assets/test_2016-01-27%2015:08:54.png)
-
-### Asian face dataset
-
-![custom_result1](web/img/change5.png)
-
-![custom_result1](web/img/change2.png)
-
-![custom_result2](web/img/change4.png)
-
-### MNIST
-
-MNIST codes are written by [@PhoenixDai](https://github.com/PhoenixDai).
-
-![mnist_result1](assets/mnist1.png)
-
-![mnist_result2](assets/mnist2.png)
-
-![mnist_result3](assets/mnist3.png)
-
-More results can be found [here](./assets/) and [here](./web/img/).
-
-
-## Training details
-
-Details of the loss of Discriminator and Generator (with custom dataset not celebA).
-
-![d_loss](assets/d_loss.png)
-
-![g_loss](assets/g_loss.png)
-
-Details of the histogram of true and fake result of discriminator (with custom dataset not celebA).
-
-![d_hist](assets/d_hist.png)
-
-![d__hist](assets/d__hist.png)
-
-
-## Related works
-
-- [BEGAN-tensorflow](https://github.com/carpedm20/BEGAN-tensorflow)
-- [DiscoGAN-pytorch](https://github.com/carpedm20/DiscoGAN-pytorch)
-- [simulated-unsupervised-tensorflow](https://github.com/carpedm20/simulated-unsupervised-tensorflow)
-
-
-## Author
-
-Taehoon Kim / [@carpedm20](http://carpedm20.github.io/)
-TensorPort tweak by [@malomarrec](https://github.com/malomarrec)
+[celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset by Ziwei Liu, Ping Luo, Xiaogang Wang, Xiaoou Tang from the [Multimedia Laboratory](http://mmlab.ie.cuhk.edu.hk/) of The Chinese University of Hong Kong
