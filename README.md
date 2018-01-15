@@ -77,6 +77,6 @@ The purpose of this fork is to teach you how to run DCGAN on ClusterOne. For mor
 
 ## License
 
-[MIT](LICENSE) © [Original repository](https://github.com/tensorport/DCGAN-tensorflow) by [Taehoon Kim](http://carpedm20.github.io/), modifications by Good AI Lab, Inc.
+[MIT](LICENSE) © [Original repository](https://github.com/tensorport/DCGAN-tensorflow) by [Taehoon Kim](http://carpedm20.github.io/), modifications by ClusterOne Inc.
 
 [celebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset by Ziwei Liu, Ping Luo, Xiaogang Wang, Xiaoou Tang from the [Multimedia Laboratory](http://mmlab.ie.cuhk.edu.hk/) of The Chinese University of Hong Kong
