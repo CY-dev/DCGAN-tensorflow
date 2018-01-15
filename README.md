@@ -61,7 +61,7 @@ Push the project code to ClusterOne with `git push clusterone master`. The proje
 Use the following command to create a job and run the project on ClusterOne. Make sure to replace `YOUR_USERNAME` with your ClusterOne username.
 
 ```shell
-$ just run --name 1-GPU-small-dataset --project YOUR_USERNAME/dcgan-demo \ 
+just run --name 1-GPU-small-dataset --project YOUR_USERNAME/dcgan-demo \ 
 --datasets YOUR_USERNAME/celeba-small  --module main \
 --requirements requirements.txt --framework-version 1.0.0 \
 --mode single-node \
