@@ -1,6 +1,6 @@
 # DCGAN on ClusterOne
 <p align="center">
-<img src="c1_logo.png" alt="ClusterOne" width="200">
+<img src="co_logo.png" alt="ClusterOne" width="200">
 <br>
 <br>
 <a href="https://slackin-altdyjrdgq.now.sh"><img src="https://slackin-altdyjrdgq.now.sh/badge.svg" alt="join us on slack"></a>
@@ -28,7 +28,7 @@ To run this project, you need:
 
 - [Python](https://python.org/) 3.5 or higher.
 - [Git](https://git-scm.com/)
-- The ClusterOne Python library. Install it with `pip install clusterone`
+- The ClusterOne Python library. Install it with `pip install clusterone=2.0.0a3`
 - A ClusterOne account. [Sign up](https://clusterone.com) for free if you don't have an account yet.
 
 ### Create the dataset
@@ -36,8 +36,11 @@ To run this project, you need:
 This example uses a small subset of the celebA dataset containing 1000 images to reduce file transfer times. You can of course also use the entire dataset. However, be aware that the dataset is large and may take a long time to upload to the ClusterOne server.
 
 1. Download the reduced dataset [here](https://tensorport-public-datasets.s3.amazonaws.com/celebA_small.zip). Unzip the downloaded file and `cd` into the directory with the data.
+2. Create a Git repository from the data with `git init`.
+3. Add and commit the data with `git add .` followed by `git commit -m "Initial commit"`
 2. Log into your ClusterOne account using `just login`.
-3. Then create a new dataset with `just create dataset`. Name the dataset `celeba-small`.
+5. Then create a new dataset with `just create dataset celeba-small`.
+6. Link the local repository to the ClusterOne dataset with  `just ln dataset -p celeba-small`.
 4. Upload the dataset to your ClusterOne account with `git push clusterone master`.
 
 ### Get the code ready
@@ -52,22 +55,28 @@ Open [main.py](/main.py) and change the flag at the top of the script to their a
 
 ### Create the project
 
-Open a command line and `cd` into the root folder of the repository. Create a new project with `just create project` and name it `dcgan-demo`.
+Open a command line and `cd` into the root folder of the repository. Create a new project with `just init project dcgan-demo`.
 
 Push the project code to ClusterOne with `git push clusterone master`. The project is now uploaded to your ClusterOne account.
 
 ## Usage
 
-Use the following command to create a job and run the project on ClusterOne. Make sure to replace `YOUR_USERNAME` with your ClusterOne username.
+Use the following command to create a job on ClusterOne.
 
 ```shell
-just run --name 1-GPU-small-dataset --project YOUR_USERNAME/dcgan-demo \ 
---datasets YOUR_USERNAME/celeba-small  --module main \
---requirements requirements.txt --framework-version 1.0.0 \
---mode single-node \
---instance-type c4.2xlarge \
---time-limit 1h --description ""
+just create job single --name 1-GPU-small-dataset --project dcgan-demo \ 
+--datasets celeba-small --framework-version 1.0.0 --time-limit 1h
 ```
+
+Now run the job with the following command:
+
+```bash
+just start job -p dcgan-demo/1-GPU-small-dataset
+```
+
+You can monitor the execution of your job on ClusterOne using `just watch`.
+
+Instead of running the model from the command line, you can also use ClusterOne's graphical web interface [Matrix](https://clusterone.com/matrix).
 
 ## More Info
 
