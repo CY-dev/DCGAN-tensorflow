@@ -74,7 +74,7 @@ Now run the job with the following command:
 just start job -p dcgan-demo/1-GPU-small-dataset
 ```
 
-You can monitor the execution of your job on Clusterone using `just watch`.
+You can monitor the execution of your job on Clusterone using `just get events`.
 
 Instead of running the model from the command line, you can also use Clusterone's graphical web interface [Matrix](https://clusterone.com/matrix).
 
