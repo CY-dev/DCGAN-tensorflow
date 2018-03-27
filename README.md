@@ -65,7 +65,7 @@ Use the following command to create a job on Clusterone.
 
 ```shell
 just create job single --name 1-GPU-small-dataset --project dcgan-demo \ 
---datasets celeba-small --framework-version 1.0.0 --time-limit 1h
+--datasets celeba-small --framework-version tensorflow-1.0.0 --time-limit 1h
 ```
 
 Now run the job with the following command:
